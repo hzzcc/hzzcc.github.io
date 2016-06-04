@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://hzzcc.github.io/2016/06/04/React Native 性能优化/index.html">
 <meta property="og:site_name" content="hzzcc's blog">
 <meta property="og:description" content="React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。">
-<meta property="og:updated_time" content="2016-06-04T22:44:30.000Z">
+<meta property="og:updated_time" content="2016-06-04T23:34:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 性能优化">
 <meta name="twitter:description" content="React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。">
@@ -108,7 +108,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/关联命令/" style="font-size: 10px;">关联命令</a> <a href="/tags/前端进阶/" style="font-size: 10px;">前端进阶</a>
+						<a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http协议/" style="font-size: 10px;">http协议</a> <a href="/tags/关联命令/" style="font-size: 10px;">关联命令</a> <a href="/tags/前端进阶/" style="font-size: 10px;">前端进阶</a>
 					</div>
 				</section>
 				
@@ -209,6 +209,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <div id="toc" class="toc-article">
+    <div class="toc-title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Navigator页面切换动画优化"><span class="toc-text">1. Navigator页面切换动画优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-LayoutAnimation-布局动画"><span class="toc-text">2. LayoutAnimation 布局动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-shouldComponentUpdate-减少页面渲染次数"><span class="toc-text">3. shouldComponentUpdate 减少页面渲染次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-ListView数据加载的优化"><span class="toc-text">4. ListView数据加载的优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-移动view（滚动，转换，旋转）导致FPS下降"><span class="toc-text">5. 移动view（滚动，转换，旋转）导致FPS下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-点按视图并不能很快的反应"><span class="toc-text">6. 点按视图并不能很快的反应</span></a></li></ol>
+</div>
+      
         <p>React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。</p>
 <a id="more"></a>
 <h3 id="1-Navigator页面切换动画优化"><a href="#1-Navigator页面切换动画优化" class="headerlink" title="1. Navigator页面切换动画优化"></a>1. Navigator页面切换动画优化</h3><p>使用InteractionManager，navigator切换完成会触发使用InteractionManager.runAfterInteractions的回调函数，你的组件可以写成这样：</p>
@@ -254,11 +259,18 @@ this.setState({width: 120});
     return nextProps.value != this.state.value;
 }
 </code></pre><p>但是如果state或props是对象时，shouldComponentUpdate一直返回true, 导致还是会执行render。所以必须对对象所有的键值进行比较才能确认是否相等。这时推荐使用immutablejs。</p>
-<h3 id="4-ListView数据加载的优化"><a href="#4-ListView数据加载的优化" class="headerlink" title="4. ListView数据加载的优化"></a>4. ListView数据加载的优化</h3><h5 id="initialListSize"><a href="#initialListSize" class="headerlink" title="initialListSize"></a>initialListSize</h5><p>这个属性会规定在第一次render时有多少行单元需要render，如果我们想尽快显示数据，我们可以设置initialListSize为1，我们就可以很快的看到其他的行会依次填充。而一屏界面有多少行取决于pageSize属性</p>
-<h5 id="pageSize"><a href="#pageSize" class="headerlink" title="pageSize"></a>pageSize</h5><p>ListView 根据 pageSize 决定每屏显示多少行，默认值为1</p>
-<h5 id="scrollRenderAheadDistance"><a href="#scrollRenderAheadDistance" class="headerlink" title="scrollRenderAheadDistance"></a>scrollRenderAheadDistance</h5><p>在行单元显示出来时多早之前开始渲染。<br>如果我们有2000行单元，如果把它们都立即渲染出来会消耗大量内存和运算资源。也有可能导致非常糟糕的丢帧。所以scrollRenderAheadDistance允许我们指定在当前窗口需要继续渲染多远的行单元。</p>
-<h5 id="removeClippedSubviews"><a href="#removeClippedSubviews" class="headerlink" title="removeClippedSubviews"></a>removeClippedSubviews</h5><p>当值为true时，不在界面显示的视图（那些overflow为true的）都被原生的父级组件移除了。这可以改善长列表的滚动性能。默认值是true。（在 0.14-rc之前的版本上是false）。<br>这是在大列表上的非常大的优化点。android上overflow属性的值一直是hidden，所以你不用担心去设值。但是在iOS上你需要保证你给每行的容器设置了overflow: hidden。</p>
-<h5 id="rowHasChanged"><a href="#rowHasChanged" class="headerlink" title="rowHasChanged"></a>rowHasChanged</h5><p>你必须提供rowHasChanged来决定每一行是否需要重新render。如果你使用了immutable 数据结构，直接使用全等检查就可以了。</p>
+<h3 id="4-ListView数据加载的优化"><a href="#4-ListView数据加载的优化" class="headerlink" title="4. ListView数据加载的优化"></a>4. ListView数据加载的优化</h3><ul>
+<li><p>initialListSize<br>这个属性会规定在第一次render时有多少行单元需要render，如果我们想尽快显示数据，我们可以设置initialListSize为1，我们就可以很快的看到其他的行会依次填充。而一屏界面有多少行取决于pageSize属性</p>
+</li>
+<li><p>pageSize<br>ListView 根据 pageSize 决定每屏显示多少行，默认值为1</p>
+</li>
+<li><p>scrollRenderAheadDistance<br>在行单元显示出来时多早之前开始渲染。<br>如果我们有2000行单元，如果把它们都立即渲染出来会消耗大量内存和运算资源。也有可能导致非常糟糕的丢帧。所以scrollRenderAheadDistance允许我们指定在当前窗口需要继续渲染多远的行单元。</p>
+</li>
+<li><p>removeClippedSubviews<br>当值为true时，不在界面显示的视图（那些overflow为true的）都被原生的父级组件移除了。这可以改善长列表的滚动性能。默认值是true。（在 0.14-rc之前的版本上是false）。<br>这是在大列表上的非常大的优化点。android上overflow属性的值一直是hidden，所以你不用担心去设值。但是在iOS上你需要保证你给每行的容器设置了overflow: hidden。</p>
+</li>
+<li><p>rowHasChanged<br>你必须提供rowHasChanged来决定每一行是否需要重新render。如果你使用了immutable 数据结构，直接使用全等检查就可以了。</p>
+</li>
+</ul>
 <h3 id="5-移动view（滚动，转换，旋转）导致FPS下降"><a href="#5-移动view（滚动，转换，旋转）导致FPS下降" class="headerlink" title="5. 移动view（滚动，转换，旋转）导致FPS下降"></a>5. 移动view（滚动，转换，旋转）导致FPS下降</h3><p>你可以使用shouldRasterizeIOS或renderToHardwareTextureAndroid来显著优化渲染。但是不能过度使用，否则你的内存会消耗殆尽。使用这些属性时，记录下性能和内存使用情况。如果你不打算再移动视图，请关闭此属性。</p>
 <h3 id="6-点按视图并不能很快的反应"><a href="#6-点按视图并不能很快的反应" class="headerlink" title="6. 点按视图并不能很快的反应"></a>6. 点按视图并不能很快的反应</h3><p>有时候，我们在点击的响应里调整透明度或高亮组件，如果我们在同一时候做了某个动作，我们在onPress返回前是不会看到任何变化的。onPress中setState可能会导致大量计算和少量帧丢失。一个解决办法是在你的onPress处理包裹在requestAnimationFrame中。</p>
 <pre><code>handleOnPress() {
@@ -278,8 +290,8 @@ this.setState({width: 120});
 <nav id="article-nav">
   
   
-    <a href="/2016/05/29/前端进阶所需了解的知识/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">前端进阶所需了解的知识</div>
+    <a href="/2016/05/31/HTTP消息中header头部信息的讲解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTP消息中header头部信息的讲解</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
