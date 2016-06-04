@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>React Native 性能优化 | hzzcc&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native 性能优化">
+<meta property="og:url" content="http://hzzcc.github.io/2016/06/04/React Native 性能优化/index.html">
+<meta property="og:site_name" content="hzzcc's blog">
+<meta property="og:description" content="React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。">
+<meta property="og:updated_time" content="2016-06-04T22:44:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native 性能优化">
+<meta name="twitter:description" content="React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。">
+  
+    <link rel="alternative" href="/atom.xml" title="hzzcc&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars1.githubusercontent.com/u/6861655?v=3&amp;s=460" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">hzzcc</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hzzcc" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http协议/" style="font-size: 10px;">http协议</a> <a href="/tags/关联命令/" style="font-size: 10px;">关联命令</a> <a href="/tags/前端进阶/" style="font-size: 10px;">前端进阶</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">hzzcc</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://avatars1.githubusercontent.com/u/6861655?v=3&amp;s=460" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">hzzcc</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hzzcc" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-React Native 性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/04/React Native 性能优化/" class="article-date">
+  	<time datetime="2016-06-04T12:24:33.000Z" itemprop="datePublished">2016-06-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React Native 性能优化
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>React native 是facebook提供的可媲美原生应用的js框架，但是做一些性能优化还是有必要的。参考官方文档，列出了以下优化点。</p>
+<a id="more"></a>
+<h3 id="1-Navigator页面切换动画优化"><a href="#1-Navigator页面切换动画优化" class="headerlink" title="1. Navigator页面切换动画优化"></a>1. Navigator页面切换动画优化</h3><p>使用InteractionManager，navigator切换完成会触发使用InteractionManager.runAfterInteractions的回调函数，你的组件可以写成这样：</p>
+<pre><code>class ExpensiveScene extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {renderPlaceholderOnly: true};
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() =&gt; {
+      this.setState({renderPlaceholderOnly: false});
+    });
+  }
+
+  render() {
+    if (this.state.renderPlaceholderOnly) {
+      return this._renderPlaceholderView();
+    }
+
+    return (
+      &lt;View&gt;
+        &lt;Text&gt;Your full view goes here&lt;/Text&gt;
+      &lt;/View&gt;
+    );
+  }
+
+
+  _renderPlaceholderView() {
+    return (
+      &lt;View&gt;
+        &lt;Text&gt;Loading...&lt;/Text&gt;
+      &lt;/View&gt;
+    );
+  }
+};
+</code></pre><h3 id="2-LayoutAnimation-布局动画"><a href="#2-LayoutAnimation-布局动画" class="headerlink" title="2. LayoutAnimation 布局动画"></a>2. LayoutAnimation 布局动画</h3><p>在你使用setState来改变页面布局时，不妨使用LayoutAnimation.easeInEaseOut()，来增加动画效果，使页面改变的更平滑。LayoutAnimation 还有提供其他的动画效果，也可以自己配制。</p>
+<pre><code>LayoutAnimation.easeInEaseOut();
+this.setState({width: 120});
+</code></pre><p>当你在js线程上做了大量的事情时，最通常的表现是”页面切换动画缓慢”。用InteractionManager是个很好的方式，但是如果来在动画过程中延迟其他动作，而使用户体验代价过高，你就可能会考虑到LayoutAnimation。<br>当前Animated api 会根据需求在js线程上计算每一帧画面，然而LayoutAnimation是利用核心动画，不会被js线程和主线程丢帧的影响。<br><strong>警告</strong> LayoutAnimation 不能被打断。如果你想阻止动画，你需要使用Animated</p>
+<h3 id="3-shouldComponentUpdate-减少页面渲染次数"><a href="#3-shouldComponentUpdate-减少页面渲染次数" class="headerlink" title="3. shouldComponentUpdate 减少页面渲染次数"></a>3. shouldComponentUpdate 减少页面渲染次数</h3><p>可以使用shouldComponentUpdate生命周期方法，此方法作用是在props或 者state改变且接收到新的值时，在render方法之前调用。此方法在第一次渲染的时候不会调用，在使用forceUpdate方法的时候也不会。所以在这个方法中我们可以增加些判断规则来避免当state或者props没有改变时所造成的重新render。</p>
+<pre><code>shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.value != this.state.value;
+}
+</code></pre><p>但是如果state或props是对象时，shouldComponentUpdate一直返回true, 导致还是会执行render。所以必须对对象所有的键值进行比较才能确认是否相等。这时推荐使用immutablejs。</p>
+<h3 id="4-ListView数据加载的优化"><a href="#4-ListView数据加载的优化" class="headerlink" title="4. ListView数据加载的优化"></a>4. ListView数据加载的优化</h3><h5 id="initialListSize"><a href="#initialListSize" class="headerlink" title="initialListSize"></a>initialListSize</h5><p>这个属性会规定在第一次render时有多少行单元需要render，如果我们想尽快显示数据，我们可以设置initialListSize为1，我们就可以很快的看到其他的行会依次填充。而一屏界面有多少行取决于pageSize属性</p>
+<h5 id="pageSize"><a href="#pageSize" class="headerlink" title="pageSize"></a>pageSize</h5><p>ListView 根据 pageSize 决定每屏显示多少行，默认值为1</p>
+<h5 id="scrollRenderAheadDistance"><a href="#scrollRenderAheadDistance" class="headerlink" title="scrollRenderAheadDistance"></a>scrollRenderAheadDistance</h5><p>在行单元显示出来时多早之前开始渲染。<br>如果我们有2000行单元，如果把它们都立即渲染出来会消耗大量内存和运算资源。也有可能导致非常糟糕的丢帧。所以scrollRenderAheadDistance允许我们指定在当前窗口需要继续渲染多远的行单元。</p>
+<h5 id="removeClippedSubviews"><a href="#removeClippedSubviews" class="headerlink" title="removeClippedSubviews"></a>removeClippedSubviews</h5><p>当值为true时，不在界面显示的视图（那些overflow为true的）都被原生的父级组件移除了。这可以改善长列表的滚动性能。默认值是true。（在 0.14-rc之前的版本上是false）。<br>这是在大列表上的非常大的优化点。android上overflow属性的值一直是hidden，所以你不用担心去设值。但是在iOS上你需要保证你给每行的容器设置了overflow: hidden。</p>
+<h5 id="rowHasChanged"><a href="#rowHasChanged" class="headerlink" title="rowHasChanged"></a>rowHasChanged</h5><p>你必须提供rowHasChanged来决定每一行是否需要重新render。如果你使用了immutable 数据结构，直接使用全等检查就可以了。</p>
+<h3 id="5-移动view（滚动，转换，旋转）导致FPS下降"><a href="#5-移动view（滚动，转换，旋转）导致FPS下降" class="headerlink" title="5. 移动view（滚动，转换，旋转）导致FPS下降"></a>5. 移动view（滚动，转换，旋转）导致FPS下降</h3><p>你可以使用shouldRasterizeIOS或renderToHardwareTextureAndroid来显著优化渲染。但是不能过度使用，否则你的内存会消耗殆尽。使用这些属性时，记录下性能和内存使用情况。如果你不打算再移动视图，请关闭此属性。</p>
+<h3 id="6-点按视图并不能很快的反应"><a href="#6-点按视图并不能很快的反应" class="headerlink" title="6. 点按视图并不能很快的反应"></a>6. 点按视图并不能很快的反应</h3><p>有时候，我们在点击的响应里调整透明度或高亮组件，如果我们在同一时候做了某个动作，我们在onPress返回前是不会看到任何变化的。onPress中setState可能会导致大量计算和少量帧丢失。一个解决办法是在你的onPress处理包裹在requestAnimationFrame中。</p>
+<pre><code>handleOnPress() {
+  // Always use TimerMixin with requestAnimationFrame, setTimeout and
+  // setInterval
+  this.requestAnimationFrame(() =&gt; {
+    this.doExpensiveAction();
+  });
+}
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/31/HTTP消息中header头部信息的讲解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTP消息中header头部信息的讲解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="React Native 性能优化" data-title="React Native 性能优化" data-url="http://hzzcc.github.io/2016/06/04/React Native 性能优化/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hzzcc"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 hzzcc
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
