@@ -6,19 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>React Native 打包失败 | hzzcc&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一般我们在打包时，下面命令就可以了1react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false
-当遇到以下错误时1FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - proc">
+  <meta name="description" content="&amp;#x4E00;&amp;#x822C;&amp;#x6211;&amp;#x4EEC;&amp;#x5728;&amp;#x6253;&amp;#x5305;&amp;#x65F6;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x547D;&amp;#x4EE4;&amp;#x5C31;&amp;#x53EF;&amp;#x4EE5;&amp;#x4E86;1react-native bundle --minify --entry-file index.ios.js --bundle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native 打包失败">
 <meta property="og:url" content="http://hzzcc.github.io/2016/05/28/React-Native-打包失败/index.html">
 <meta property="og:site_name" content="hzzcc's blog">
-<meta property="og:description" content="一般我们在打包时，下面命令就可以了1react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false
-当遇到以下错误时1FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - proc">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x822C;&amp;#x6211;&amp;#x4EEC;&amp;#x5728;&amp;#x6253;&amp;#x5305;&amp;#x65F6;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x547D;&amp;#x4EE4;&amp;#x5C31;&amp;#x53EF;&amp;#x4EE5;&amp;#x4E86;1react-native bundle --minify --entry-file index.ios.js --bundle">
 <meta property="og:updated_time" content="2016-06-04T23:36:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 打包失败">
-<meta name="twitter:description" content="一般我们在打包时，下面命令就可以了1react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false
-当遇到以下错误时1FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - proc">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x822C;&amp;#x6211;&amp;#x4EEC;&amp;#x5728;&amp;#x6253;&amp;#x5305;&amp;#x65F6;&amp;#xFF0C;&amp;#x4E0B;&amp;#x9762;&amp;#x547D;&amp;#x4EE4;&amp;#x5C31;&amp;#x53EF;&amp;#x4EE5;&amp;#x4E86;1react-native bundle --minify --entry-file index.ios.js --bundle">
   
     <link rel="alternative" href="/atom.xml" title="hzzcc&#39;s blog" type="application/atom+xml">
   
@@ -220,9 +217,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一般我们在打包时，下面命令就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false</span><br></pre></td></tr></table></figure></p>
-<p>当遇到以下错误时<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - process out of memory</span><br></pre></td></tr></table></figure></p>
-<p>需要调整node最大空间，这个时候需要指定最初安装react-native-cli的绝对位置,而我的位置是~/git/nvm/versions/node/v5.6.0/bin/react-native，所以命令如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 ~/git/nvm/versions/node/v5.6.0/bin/react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false</span><br></pre></td></tr></table></figure></p>
+        <p>&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x5728;&#x6253;&#x5305;&#x65F6;&#xFF0C;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false</span><br></pre></td></tr></table></figure></p>
+<p>&#x5F53;&#x9047;&#x5230;&#x4EE5;&#x4E0B;&#x9519;&#x8BEF;&#x65F6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - process out of memory</span><br></pre></td></tr></table></figure></p>
+<p>&#x9700;&#x8981;&#x8C03;&#x6574;node&#x6700;&#x5927;&#x7A7A;&#x95F4;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x6700;&#x521D;&#x5B89;&#x88C5;react-native-cli&#x7684;&#x7EDD;&#x5BF9;&#x4F4D;&#x7F6E;,&#x800C;&#x6211;&#x7684;&#x4F4D;&#x7F6E;&#x662F;~/git/nvm/versions/node/v5.6.0/bin/react-native&#xFF0C;&#x6240;&#x4EE5;&#x547D;&#x4EE4;&#x5982;&#x4E0B;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 ~/git/nvm/versions/node/v5.6.0/bin/react-native bundle --minify --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios --dev false</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
